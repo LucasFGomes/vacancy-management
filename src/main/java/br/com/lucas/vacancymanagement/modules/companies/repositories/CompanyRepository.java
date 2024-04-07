@@ -9,4 +9,5 @@ import br.com.lucas.vacancymanagement.modules.companies.entities.CompanyEntity;
 
 public interface CompanyRepository extends JpaRepository<CompanyEntity, UUID> {
   Optional<CompanyEntity> findByUsernameOrEmail(String username, String email);
+  Optional<CompanyEntity> findByUsername(String username);
 }

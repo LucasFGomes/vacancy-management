@@ -1,4 +1,4 @@
-package br.com.lucas.vacancymanagement.modules.candidates.exceptions;
+package br.com.lucas.vacancymanagement.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

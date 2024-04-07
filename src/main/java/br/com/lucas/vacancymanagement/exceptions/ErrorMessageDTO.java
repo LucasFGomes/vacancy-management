@@ -1,4 +1,4 @@
-package br.com.lucas.vacancymanagement.modules.candidates.exceptions;
+package br.com.lucas.vacancymanagement.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
