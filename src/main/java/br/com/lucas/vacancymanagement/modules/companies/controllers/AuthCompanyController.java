@@ -12,13 +12,13 @@ import br.com.lucas.vacancymanagement.modules.companies.dtos.AuthCompanyDTO;
 import br.com.lucas.vacancymanagement.modules.companies.useCases.AuthCompanyUseCase;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/companies")
 public class AuthCompanyController {
 
   @Autowired
   private AuthCompanyUseCase authCompanyUseCase;
   
-  @PostMapping("/company")
+  @PostMapping("/auth")
   public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) {
     try {
       var result = this.authCompanyUseCase.execute(authCompanyDTO);
