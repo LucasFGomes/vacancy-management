@@ -16,8 +16,6 @@ public class ProfileCandidateUseCase {
   private CandidateRepository candidateRepository;
   
   public ProfileCandidateResponseDTO execute(UUID candidateId) {
-    System.out.println("candidateId ========================");
-    System.out.println(candidateId);
     var candidate = this.candidateRepository.findById(candidateId)
                                             .orElseThrow(() -> {
                                               throw new UsernameNotFoundException("Candidate not found");

@@ -3,6 +3,7 @@ package br.com.lucas.vacancymanagement.modules.companies.controllers;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +17,14 @@ import jakarta.validation.Valid;
 import lombok.NonNull;
 
 @RestController
-@RequestMapping("/jobs")
+@RequestMapping("/companies/jobs")
 public class JobController {
 
   @Autowired
   private CreateJobUseCase createJobUseCase;
   
   @PostMapping("/")
+  @PreAuthorize("hasRole('COMPANY')")
   public JobEntity create(@Valid @RequestBody @NonNull CreateJobDTO createJobDTO, HttpServletRequest request) {
     var companyId = request.getAttribute("company_id");
 
