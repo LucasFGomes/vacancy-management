@@ -28,8 +28,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     // SecurityContextHolder.getContext().setAuthentication(null);
     String header = request.getHeader("Authorization");
 
-    System.out.println(request.getRequestURI());
-
     if (request.getRequestURI().startsWith("/companies")) {
       if (header != null) {
         var token = this.jwtProvider.validateToken(header);
