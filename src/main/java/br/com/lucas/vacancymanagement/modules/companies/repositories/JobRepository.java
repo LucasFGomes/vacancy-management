@@ -9,6 +9,6 @@ import br.com.lucas.vacancymanagement.modules.companies.entities.JobEntity;
 
 public interface JobRepository extends JpaRepository<JobEntity, UUID> {
 
-  List<JobEntity> findByDescriptionContaining(String filter);
+  List<JobEntity> findByDescriptionContainingIgnoreCase(String filter);
 
 }

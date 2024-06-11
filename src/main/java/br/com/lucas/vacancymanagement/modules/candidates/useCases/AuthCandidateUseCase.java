@@ -34,7 +34,7 @@ public class AuthCandidateUseCase {
   public AuthCandidateResponseDTO execute(AuthCandidateRequestDTO authCandidateDTO) throws AuthenticationException {
     var candidate = this.candidateRepository.findByUsername(authCandidateDTO.username())
                       .orElseThrow(() -> {
-                        throw new UsernameNotFoundException("Username/password incorrect");
+                        throw new UsernameNotFoundException("Username/password está incorreto");
                       });
 
     var passwordMatch = this.passwordEncoder.matches(authCandidateDTO.password(), candidate.getPassword());
