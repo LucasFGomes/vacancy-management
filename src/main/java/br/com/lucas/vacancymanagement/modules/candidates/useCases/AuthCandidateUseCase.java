@@ -2,7 +2,7 @@ package br.com.lucas.vacancymanagement.modules.candidates.useCases;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
+import java.util.List;
 
 import javax.security.sasl.AuthenticationException;
 
@@ -33,9 +33,7 @@ public class AuthCandidateUseCase {
   
   public AuthCandidateResponseDTO execute(AuthCandidateRequestDTO authCandidateDTO) throws AuthenticationException {
     var candidate = this.candidateRepository.findByUsername(authCandidateDTO.username())
-                      .orElseThrow(() -> {
-                        throw new UsernameNotFoundException("Username/password está incorreto");
-                      });
+                      .orElseThrow(() -> new UsernameNotFoundException("Username/password está incorreto"));
 
     var passwordMatch = this.passwordEncoder.matches(authCandidateDTO.password(), candidate.getPassword());
 
@@ -48,15 +46,13 @@ public class AuthCandidateUseCase {
     var token = JWT.create()
                   .withIssuer("javagas")
                   .withSubject(candidate.getId().toString())
-                  .withClaim("roles", Arrays.asList("CANDIDATE"))
+                  .withClaim("roles", List.of("CANDIDATE"))
                   .withExpiresAt(expiresIn)
                   .sign(algorithm);
-  
-    var authCandidateResponse = AuthCandidateResponseDTO.builder()
-                                                        .access_token(token)
-                                                        .expires_in(expiresIn.toEpochMilli())
-                                                        .build();
 
-    return authCandidateResponse;
+      return AuthCandidateResponseDTO.builder()
+                                      .access_token(token)
+                                      .expires_in(expiresIn.toEpochMilli())
+                                      .build();
   }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionHandlerController {
 
-  private MessageSource messageSource;
+  private final MessageSource messageSource;
 
   public ExceptionHandlerController(MessageSource message) {
     this.messageSource = message;
