@@ -1,5 +1,7 @@
 package br.com.lucas.vacancymanagement.modules.companies.controllers;
 
+import java.util.UUID;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,8 +64,21 @@ public class CreateJobControllerTest {
                                       .content(TestUtils.objectToJSON(createJobDTO))
                                       .header("Authorization", TestUtils.generateToken(company.getId(), "JAVAGAS_@123#")))
                                       .andExpect(MockMvcResultMatchers.status().isOk());
+  }
 
-    
+  @Test
+  public void should_be_able_to_create_a_new_job_if_company_not_found() throws Exception {
+    var createJobDTO = CreateJobDTO.builder()
+                                    .benefits("BENEFITS_TEST")
+                                    .description("DESCRIPTION_TEST")
+                                    .level("LEVEL_TEST")
+                                    .build();
+
+      mvc.perform(MockMvcRequestBuilders.post("/companies/jobs/")
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(TestUtils.objectToJSON(createJobDTO))
+                                        .header("Authorization", TestUtils.generateToken(UUID.randomUUID(), "JAVAGAS_@123#")))
+                                        .andExpect(MockMvcResultMatchers.status().isBadRequest());
   }
 }
  
