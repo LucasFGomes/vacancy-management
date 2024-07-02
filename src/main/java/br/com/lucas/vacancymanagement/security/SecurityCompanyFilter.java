@@ -2,6 +2,7 @@ package br.com.lucas.vacancymanagement.security;
 
 import java.io.IOException;
 
+import br.com.lucas.vacancymanagement.providers.JWTCompanyProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.com.lucas.vacancymanagement.providers.JWTProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SecurityCompanyFilter extends OncePerRequestFilter {
 
   @Autowired
-  private JWTProvider jwtProvider;
+  private JWTCompanyProvider jwtProvider;
 
   @SuppressWarnings("null")
   @Override
