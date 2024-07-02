@@ -2,6 +2,7 @@ package br.com.lucas.vacancymanagement.modules.candidates.useCases;
 
 import java.util.UUID;
 
+import br.com.lucas.vacancymanagement.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -17,18 +18,14 @@ public class ProfileCandidateUseCase {
   
   public ProfileCandidateResponseDTO execute(UUID candidateId) {
     var candidate = this.candidateRepository.findById(candidateId)
-                                            .orElseThrow(() -> {
-                                              throw new UsernameNotFoundException("Candidate not found");
-                                            });
+                                            .orElseThrow(UserNotFoundException::new);
 
-    var candidateResponse = ProfileCandidateResponseDTO.builder()
-                                                      .id(candidate.getId())
-                                                      .name(candidate.getName())
-                                                      .email(candidate.getEmail())
-                                                      .username(candidate.getUsername())
-                                                      .description(candidate.getDescription())
-                                                      .build();
-
-    return candidateResponse;
+    return ProfileCandidateResponseDTO.builder()
+                                      .id(candidate.getId())
+                                      .name(candidate.getName())
+                                      .email(candidate.getEmail())
+                                      .username(candidate.getUsername())
+                                      .description(candidate.getDescription())
+                                      .build();
   }
 }

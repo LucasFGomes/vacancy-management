@@ -2,6 +2,6 @@ package br.com.lucas.vacancymanagement.exceptions;
 
 public class CompanyNotFoundException extends RuntimeException {
   public CompanyNotFoundException() {
-    super("Company não existe");
+    super("Empresa não existe");
   }
 }
